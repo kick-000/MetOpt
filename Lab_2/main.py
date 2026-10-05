@@ -58,6 +58,7 @@ match fs:
         print("такого пункта меню нет")
         exit()
 
+
 df_expr = sp.diff(expression, x)
 L = calculate_L(df_expr, a, b)
 print("L =", L)
@@ -68,6 +69,7 @@ start_time = time.time()
 
 while True:
     iterations += 1
+    global_best_G = float('inf')
     points.sort()
 
     best_z = None
@@ -83,9 +85,11 @@ while True:
         if G < best_G:
             best_G = G
             best_z = z
+        if G < global_best_G:
+            global_best_G = G
 
     new_x = best_z
-    new_f = f(new_x)
+    new_f = f(new_x) ## настоящая функция
 
     points.append((new_x, new_f))
     current_best_f = min(p[1] for p in points)
@@ -97,16 +101,7 @@ while True:
         break
 
 
-global_best_G = float('inf')
-points.sort()
 
-for i in range(len(points) - 1):
-    xi, fi = points[i]
-    xj, fj = points[i + 1]
-    G = (fi + fj) / 2 - L * (xj - xi) / 2
-
-    if G < global_best_G:
-        global_best_G = G
 
 
 end_time = time.time()
@@ -130,6 +125,7 @@ G_values = []
 
 for xx in X_plot:
     values = []
+
     for xi, fi in points:
         values.append(fi - L * abs(xx - xi))
 
