@@ -3,6 +3,8 @@ import sympy as sp
 import matplotlib.pyplot as plt
 import time
 
+x = sp.symbols('x')
+
 def calculate_L(df_expr, a, b):
     ddf_expr = sp.diff(df_expr, x)
     critical_points = sp.solve(ddf_expr, x)
@@ -20,26 +22,50 @@ def calculate_L(df_expr, a, b):
 
     return L
 
-x = sp.symbols('x')
-function_string = input("f(x): ")
-expression = sp.sympify(function_string)
-f = sp.lambdify(x, expression, "numpy")
-
-a = float(input("a: "))
-b = float(input("b: "))
-eps = float(input("eps: "))
 
 
+fs = int(input("Готовые примеры 1, 2, 3, Свой пример - 4:  "))
+match fs:
+    case 1:
+        function_string = "x**2"
+        expression = sp.sympify(function_string)
+        f = sp.lambdify(x, expression, "numpy")
+        a = -2
+        b = 2
+        eps = 0.01
+    case 2:
+        function_string = "(x - 2)**2 + 1"
+        expression = sp.sympify(function_string)
+        f = sp.lambdify(x, expression, "numpy")
+        a = -1
+        b = 5
+        eps = 0.01
+    case 3:
+        expression = x**2 + sp.sin(3*x)
+        f = sp.lambdify(x, expression, "numpy")
+        a = -2
+        b = 2
+        eps = 0.01
+    case 4:
+        function_string = input("f(x): ")
+        expression = sp.sympify(function_string)
+        f = sp.lambdify(x, expression, "numpy")
 
+        a = float(input("a: "))
+        b = float(input("b: "))
+        eps = float(input("eps: "))
+    case _:
+        print("такого пункта меню нет")
+        exit()
 
 df_expr = sp.diff(expression, x)
 L = calculate_L(df_expr, a, b)
 print("L =", L)
 
-
 points = [(a, f(a)),(b, f(b)) ]
 iterations = 0
 start_time = time.time()
+
 while True:
     iterations += 1
     points.sort()
@@ -58,20 +84,34 @@ while True:
             best_G = G
             best_z = z
 
-
     new_x = best_z
     new_f = f(new_x)
 
     points.append((new_x, new_f))
+    current_best_f = min(p[1] for p in points)
 
-    if new_f - best_G < eps:
+    if current_best_f - best_G  < eps:
         break
 
     if iterations == 10000:
         break
 
+
+global_best_G = float('inf')
+points.sort()
+
+for i in range(len(points) - 1):
+    xi, fi = points[i]
+    xj, fj = points[i + 1]
+    G = (fi + fj) / 2 - L * (xj - xi) / 2
+
+    if G < global_best_G:
+        global_best_G = G
+
+
 end_time = time.time()
 elapsed_time = end_time - start_time
+
 best_point = min(points, key=lambda p: p[1])
 best_x = best_point[0]
 best_value = best_point[1]
@@ -79,8 +119,8 @@ best_value = best_point[1]
 print("Итераций:", iterations)
 print("x* =", best_x)
 print("f(x*) =", best_value)
-print("Нижняя оценка =", best_G)
-print("Погрешность =", best_value - best_G)
+print("Нижняя оценка =", global_best_G)
+print("Погрешность =", best_value - global_best_G)
 print("Время выполнения:", elapsed_time, "сек.")
 
 
@@ -90,7 +130,6 @@ G_values = []
 
 for xx in X_plot:
     values = []
-
     for xi, fi in points:
         values.append(fi - L * abs(xx - xi))
 
