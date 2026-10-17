@@ -12,8 +12,9 @@
 ### Решение на бумаге
 
 
-<img width="1920" height="2560" alt="image" src="https://github.com/user-attachments/assets/3669c06b-3b1c-4d0d-8201-c3ebab986434" />
-<img width="1920" height="2560" alt="image" src="https://github.com/user-attachments/assets/13e05ca5-1a2b-4659-aaae-abc2d6150ae7" />
+<img width="691" height="804" alt="image" src="https://github.com/user-attachments/assets/14944b17-4b0a-49b9-aa66-eb16bf693e54" />
+<img width="705" height="541" alt="image" src="https://github.com/user-attachments/assets/b4af508d-cf58-4d4e-bd0d-037ab4777376" />
+
 
 
 ## Решение кодом 
