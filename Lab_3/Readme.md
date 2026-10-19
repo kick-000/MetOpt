@@ -9,7 +9,7 @@
 
 <img width="413" height="108" alt="image" src="https://github.com/user-attachments/assets/76be671d-6614-43e0-8145-3bd11670f2cf" />
 
-### Решение на бумаге
+### Ручное решение
 
 
 <img width="691" height="804" alt="image" src="https://github.com/user-attachments/assets/14944b17-4b0a-49b9-aa66-eb16bf693e54" />
