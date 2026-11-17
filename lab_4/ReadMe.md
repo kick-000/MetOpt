@@ -8,6 +8,7 @@
 
 ## 1. Ручное решение
 
+https://github.com/kick-000/MetOpt/blob/main/lab_4/%D1%80%D1%83%D1%87%D0%BD%D0%BE%D0%B5%20%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5.pdf
 
 ## 2. Программная реализация задачи
 
